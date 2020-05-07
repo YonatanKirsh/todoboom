@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">postpc-ex2</string>
+    <string name="button_text">create</string>
 </resources>
