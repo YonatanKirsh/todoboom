@@ -7,27 +7,30 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    final String errorMessage = "Woops! You need to enter a message first..";
+    final String ERROR_MESSAGE = "Woops! You need to enter a message first..";
+    final static private String CURRENT_INPUT = "current_input";
 
     private TodoAdapter mAdapter;
     private EditText editText;
-    private ArrayList<TodoSentence> todoSentences = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // init general crap
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // init adapter holder
+        initAdapterHolder();
+
+        // define editText and button
         this.editText = findViewById(R.id.editText1);
         Button button = findViewById(R.id.btn1);
         button.setOnClickListener(new View.OnClickListener() {
@@ -36,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 // add to list iff not empty
                 Editable userInput = editText.getText();
                 if (userInput.toString().isEmpty()){
-                    Snackbar.make(v, errorMessage, Snackbar.LENGTH_SHORT).show();
+                    Snackbar.make(v, ERROR_MESSAGE, Snackbar.LENGTH_SHORT).show();
                     return;
                 }
                 mAdapter.addSentence(userInput.toString());
@@ -49,33 +52,24 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
 
-        // create/re-create adapter
+        // update input in editText
         if (savedInstanceState != null){
-            String[] texts = savedInstanceState.getStringArray("texts");
-            boolean[] dones = savedInstanceState.getBooleanArray("dones");
-            if (texts != null){
-                for (int i = 0; i < texts.length; ++i){
-                    todoSentences.add(new TodoSentence(texts[i], dones[i]));
-                }
-            }
+            String currentInput = savedInstanceState.getString(CURRENT_INPUT);
+            editText.setText(currentInput);
         }
-
-        mAdapter = new TodoAdapter(todoSentences);
         recyclerView.setAdapter(mAdapter);
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState) {
-        int size = todoSentences.size();
-        String[] texts = new String[size];
-        boolean[] dones = new boolean[size];
-        for (int i = 0; i < size; ++i){
-            texts[i] = todoSentences.get(i).mText;
-            dones[i] = todoSentences.get(i).mIsFinished;
-        }
-
-        outState.putStringArray("texts", texts);
-        outState.putBooleanArray("dones", dones);
+        String currentInput = editText.getText().toString();
+        outState.putString(CURRENT_INPUT, currentInput);
         super.onSaveInstanceState(outState);
+    }
+
+    private void initAdapterHolder(){
+        PreferencesApp app = (PreferencesApp) getApplicationContext();
+        mAdapter = app.mAdapter;
+        Log.d("MainActivity", "Todo List Size: " + mAdapter.getItemCount());
     }
 }

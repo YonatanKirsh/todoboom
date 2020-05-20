@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId "com.example.postpc_ex2"
+        applicationId "com.example.postpc_ex3"
         minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
@@ -33,4 +33,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha03'
     implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
 }
