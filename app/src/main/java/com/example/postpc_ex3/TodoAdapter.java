@@ -1,4 +1,4 @@
-package com.example.postpc_ex2;
+package com.example.postpc_ex3;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;

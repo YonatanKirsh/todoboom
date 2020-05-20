@@ -1,4 +1,4 @@
-package com.example.postpc_ex2;
+package com.example.postpc_ex3;
 
 import org.junit.Test;
 
