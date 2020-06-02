@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "210985212044",
+    "firebase_url": "https://kirsh-postpc.firebaseio.com",
+    "project_id": "kirsh-postpc",
+    "storage_bucket": "kirsh-postpc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:210985212044:android:0e9e06290a579ec29383a9",
+        "android_client_info": {
+          "package_name": "com.kirsh.todoboom"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "210985212044-399ha7654460njscm0mdqj4tqk7p6r1e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDg2v4EkVjiMh2NZGmqHAiATRnT5CLoz7s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "210985212044-399ha7654460njscm0mdqj4tqk7p6r1e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

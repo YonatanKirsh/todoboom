@@ -1,4 +1,4 @@
-package com.example.todoboom;
+package com.kirsh.todoboom;
 
 import org.junit.Test;
 

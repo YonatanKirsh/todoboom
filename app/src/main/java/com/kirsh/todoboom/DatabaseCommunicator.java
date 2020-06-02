@@ -1,4 +1,4 @@
-package com.example.todoboom;
+package com.kirsh.todoboom;
 
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -10,7 +10,7 @@ public class DatabaseCommunicator {
 
     private static boolean initialized = false;
     private static DatabaseCommunicator singleton;
-    private FirebaseFirestore db;
+    private static FirebaseFirestore db;
 
     private DatabaseCommunicator(){
         initialized = true;

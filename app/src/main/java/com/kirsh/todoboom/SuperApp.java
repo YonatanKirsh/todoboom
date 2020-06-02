@@ -1,8 +1,8 @@
-package com.example.todoboom;
+package com.kirsh.todoboom;
 
 import android.app.Application;
 
-public class PreferencesApp extends Application {
+public class SuperApp extends Application {
 
     public DatabaseCommunicator mCommunicator;
     public TodoAdapter mAdapter;

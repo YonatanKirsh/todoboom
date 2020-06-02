@@ -1,4 +1,4 @@
-package com.example.todoboom;
+package com.kirsh.todoboom;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.kirsh.todoboom.R;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

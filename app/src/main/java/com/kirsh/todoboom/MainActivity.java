@@ -1,4 +1,4 @@
-package com.example.todoboom;
+package com.kirsh.todoboom;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.kirsh.todoboom.R;
 import com.google.android.material.snackbar.Snackbar;
 
 
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initAdapterHolder(){
-        PreferencesApp app = (PreferencesApp) getApplicationContext();
+        SuperApp app = (SuperApp) getApplicationContext();
         mAdapter = app.mAdapter;
         Log.d("MainActivity", "Todo List Size: " + mAdapter.getItemCount());
     }

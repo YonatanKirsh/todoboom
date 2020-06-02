@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.todoboom">
+    package="com.kirsh.todoboom">
 
     <application
-        android:name="com.example.todoboom.PreferencesApp"
+        android:name="com.kirsh.todoboom.todoboom.example.todoboom.SuperApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.example.todoboom.MessageActivity"></activity>
-        <activity android:name="com.example.todoboom.MainActivity">
+        <activity android:name="com.kirsh.todoboom.todoboom.example.todoboom.MessageActivity"></activity>
+        <activity android:name="com.kirsh.todoboom.todoboom.example.todoboom.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

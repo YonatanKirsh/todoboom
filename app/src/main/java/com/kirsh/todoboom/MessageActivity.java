@@ -1,8 +1,10 @@
-package com.example.todoboom;
+package com.kirsh.todoboom;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.kirsh.todoboom.R;
 
 public class MessageActivity extends AppCompatActivity {
 
