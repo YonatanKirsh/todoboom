@@ -3,21 +3,22 @@
     package="com.kirsh.todoboom">
 
     <application
-        android:name="com.kirsh.todoboom.todoboom.example.todoboom.SuperApp"
+        android:name=".SuperApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.kirsh.todoboom.todoboom.example.todoboom.MessageActivity"></activity>
-        <activity android:name="com.kirsh.todoboom.todoboom.example.todoboom.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".InCompleteMessageActivity"></activity>
+        <activity android:name=".CompleteMessageActivity"></activity>
     </application>
 
 </manifest>

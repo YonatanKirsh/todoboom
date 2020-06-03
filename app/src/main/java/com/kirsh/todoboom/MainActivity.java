@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.text.Editable;
 import android.util.Log;
 import android.view.View;
@@ -18,7 +19,8 @@ import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity {
     final String ERROR_MESSAGE = "Woops! You need to enter a message first..";
-    final static private String CURRENT_INPUT = "current_input";
+    private final static String TAG = "Main Activity";
+    private final static String CURRENT_INPUT = "current_input";
 
     private TodoAdapter mAdapter;
     private EditText editText;
@@ -29,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // init adapter holder
-        initAdapterHolder();
+        initAdapter();
 
         // define editText and button
         this.editText = findViewById(R.id.editText1);
@@ -68,9 +70,19 @@ public class MainActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
-    private void initAdapterHolder(){
+    @Override
+    protected void onResume() {
+        super.onResume();
+        final SuperApp app = (SuperApp) getApplicationContext();
+        DatabaseCommunicator communicator = app.mCommunicator;
+        mAdapter = new TodoAdapter(communicator, this);
+    }
+
+    private void initAdapter(){
         SuperApp app = (SuperApp) getApplicationContext();
-        mAdapter = app.mAdapter;
-        Log.d("MainActivity", "Todo List Size: " + mAdapter.getItemCount());
+        DatabaseCommunicator communicator = app.mCommunicator;
+        mAdapter = new TodoAdapter(communicator, this);
+//        mAdapter = new TodoAdapter(DatabaseCommunicator.getSingleton());
+        Log.d(TAG, "Todo List Size: " + mAdapter.getItemCount());
     }
 }

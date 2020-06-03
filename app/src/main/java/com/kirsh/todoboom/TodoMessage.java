@@ -1,22 +1,33 @@
 package com.kirsh.todoboom;
 
-import java.time.LocalDateTime;
+import com.google.firebase.Timestamp;
 
-class TodoMessage {
-    String content;
-    boolean isDone = false;
-    LocalDateTime creationTimestamp;
-    LocalDateTime editTimestamp;
-    String id; // todo
+class TodoMessage implements Comparable<TodoMessage>{
+    public String content;
+    public boolean isDone = false;
+    public Timestamp creationTimestamp;
+    public Timestamp editTimestamp;
+    public String id;
+
+    // must include for Firestorm compatibility
+    TodoMessage(){}
 
     TodoMessage(String input){
-        creationTimestamp = LocalDateTime.now();
+        creationTimestamp = Timestamp.now();
         editTimestamp = creationTimestamp;
         content = input;
     }
 
-    TodoMessage(String input, boolean isFinished){
-        this(input);
-        isDone = isFinished;
+
+    void updateEditTimestamp(){ editTimestamp = Timestamp.now(); }
+
+    void markAsDone(){
+        isDone = true;
+        updateEditTimestamp();
+    }
+
+    @Override
+    public int compareTo(TodoMessage other) {
+        return creationTimestamp.compareTo(other.creationTimestamp);
     }
 }

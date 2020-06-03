@@ -6,7 +6,7 @@ import android.os.Bundle;
 
 import com.kirsh.todoboom.R;
 
-public class MessageActivity extends AppCompatActivity {
+public class CompleteMessageActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
