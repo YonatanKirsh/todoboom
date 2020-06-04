@@ -1,7 +1,5 @@
 package com.kirsh.todoboom;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -11,10 +9,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
-import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoMessageHolder>{
+
+    public final static String TODO_ID = "todoId";
+
     public ArrayList<TodoMessage> todoList = new ArrayList<>();
     DatabaseCommunicator mCommunicator;
     AppCompatActivity mCaller;
@@ -74,8 +75,8 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoMessageHol
         return todoList.size();
     }
 
-    void addSentence(String sentence){
-        TodoMessage newTodo = new TodoMessage(sentence);
+    void addTodoMessage(String content){
+        TodoMessage newTodo = new TodoMessage(content);
         mCommunicator.addTodo(newTodo);
         notifyUpdate();
     }
@@ -85,21 +86,21 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoMessageHol
         notifyUpdate();
     }
 
-    private void notifyUpdate(){
+    void notifyUpdate(){
         todoList = mCommunicator.getAllTodos();
         notifyDataSetChanged();
     }
 
     public void openInComplete(String id) {
-        Intent intent = new Intent(mCaller, InCompleteMessageActivity.class);
-        intent.putExtra("todo", id);
+        Intent intent = new Intent(mCaller, NotCompletedMessageActivity.class);
+        intent.putExtra(TODO_ID, id);
         mCaller.startActivity(intent);
     }
 
 
     public void openComplete(String id){
-        Intent intent = new Intent(mCaller, CompleteMessageActivity.class);
-        intent.putExtra("todo", id);
+        Intent intent = new Intent(mCaller, CompletedMessageActivity.class);
+        intent.putExtra(TODO_ID, id);
         mCaller.startActivity(intent);
     }
 }

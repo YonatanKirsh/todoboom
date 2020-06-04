@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.text.Editable;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private final static String CURRENT_INPUT = "current_input";
 
     private TodoAdapter mAdapter;
+    private DatabaseCommunicator mCommunicator;
     private EditText editText;
 
     @Override
@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
                     Snackbar.make(v, ERROR_MESSAGE, Snackbar.LENGTH_SHORT).show();
                     return;
                 }
-                mAdapter.addSentence(userInput.toString());
+                mAdapter.addTodoMessage(userInput.toString());
                 userInput.clear();
             }
         });
@@ -73,16 +73,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        final SuperApp app = (SuperApp) getApplicationContext();
-        DatabaseCommunicator communicator = app.mCommunicator;
-        mAdapter = new TodoAdapter(communicator, this);
+        mAdapter.notifyUpdate();
     }
 
     private void initAdapter(){
         SuperApp app = (SuperApp) getApplicationContext();
-        DatabaseCommunicator communicator = app.mCommunicator;
-        mAdapter = new TodoAdapter(communicator, this);
-//        mAdapter = new TodoAdapter(DatabaseCommunicator.getSingleton());
+        mCommunicator = app.mCommunicator;
+        mAdapter = new TodoAdapter(mCommunicator, this);
         Log.d(TAG, "Todo List Size: " + mAdapter.getItemCount());
     }
 }

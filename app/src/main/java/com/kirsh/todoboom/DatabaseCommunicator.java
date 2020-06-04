@@ -84,21 +84,21 @@ public class DatabaseCommunicator {
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d(TAG, "Message successfully written!");
+                        Log.d(TAG, "Todo successfully written. id: " + todo.id);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error writing message :(", e);
+                        Log.w(TAG, "Error writing Todo: ", e);
                     }
                 });
     }
 
-    void markTodoAsDone(String id){
-        TodoMessage todo = getTodoFromId(id);
-        todo.markAsDone();
-        collectionReference.document(todo.id).set(todo);
+    TodoMessage markTodoAsDone(TodoMessage todoMessage){
+        todoMessage.markAsDone();
+        collectionReference.document(todoMessage.id).set(todoMessage);
+        return todoMessage;
     }
 
     void deleteTodoForever(String id){
@@ -106,6 +106,20 @@ public class DatabaseCommunicator {
         collectionReference
                 .document(id)
                 .delete();
+    }
+
+    TodoMessage setTodoContent(TodoMessage todoMessage, String content){
+        todoMessage.content = content;
+        collectionReference
+                .document(todoMessage.id)
+                .set(todoMessage);
+        return todoMessage;
+    }
+
+    TodoMessage updateEditTime(TodoMessage todoMessage){
+        todoMessage.updateEditTimestamp();
+        collectionReference.document(todoMessage.id).set(todoMessage);
+        return todoMessage;
     }
 
     ArrayList<TodoMessage> getAllTodos(){

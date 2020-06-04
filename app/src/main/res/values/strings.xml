@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">TodoBoom! 4.0</string>
-    <string name="button_text">create</string>
+    <string name="create_todo_text">create</string>
+    <string name="apply_changes_text">apply changes</string>
+    <string name="mark_done_text">Done!</string>
+    <string name="edit_not_completed_todo">edit todo</string>
 </resources>
