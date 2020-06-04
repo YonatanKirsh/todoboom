@@ -11,7 +11,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -43,7 +42,7 @@ public class DatabaseCommunicator {
         return singleton;
     }
 
-    private void setListen(){
+    void setListen(){
         collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot querySnapshots, @Nullable FirebaseFirestoreException e) {
@@ -95,9 +94,15 @@ public class DatabaseCommunicator {
                 });
     }
 
-    TodoMessage markTodoAsDone(TodoMessage todoMessage){
-        todoMessage.markAsDone();
+    TodoMessage flipDone(TodoMessage todoMessage){
+        todoMessage.flipDone();
         collectionReference.document(todoMessage.id).set(todoMessage);
+        if (todoMessage.isDone){
+            Log.d(TAG, "Todo has been marked done. id: " + todoMessage.id);
+        }else {
+            Log.d(TAG, "Todo has been marked undone. id: " + todoMessage.id);
+        }
+
         return todoMessage;
     }
 
@@ -106,13 +111,15 @@ public class DatabaseCommunicator {
         collectionReference
                 .document(id)
                 .delete();
+        Log.d(TAG, "Todo has been deleted. id: " + id);
     }
 
     TodoMessage setTodoContent(TodoMessage todoMessage, String content){
-        todoMessage.content = content;
+        todoMessage.setContent(content);
         collectionReference
                 .document(todoMessage.id)
                 .set(todoMessage);
+        Log.d(TAG, "Todo's content has been updated. id: " + todoMessage.id);
         return todoMessage;
     }
 

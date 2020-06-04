@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     private final static String CURRENT_INPUT = "current_input";
 
     private TodoAdapter mAdapter;
-    private DatabaseCommunicator mCommunicator;
     private EditText editText;
 
     @Override
@@ -60,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
             String currentInput = savedInstanceState.getString(CURRENT_INPUT);
             editText.setText(currentInput);
         }
+        mAdapter.notifyUpdate();
         recyclerView.setAdapter(mAdapter);
     }
 
@@ -78,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void initAdapter(){
         SuperApp app = (SuperApp) getApplicationContext();
-        mCommunicator = app.mCommunicator;
-        mAdapter = new TodoAdapter(mCommunicator, this);
+        DatabaseCommunicator communicator = app.mCommunicator;
+        mAdapter = new TodoAdapter(communicator, this);
         Log.d(TAG, "Todo List Size: " + mAdapter.getItemCount());
     }
 }

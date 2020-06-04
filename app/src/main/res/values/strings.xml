@@ -4,4 +4,6 @@
     <string name="apply_changes_text">apply changes</string>
     <string name="mark_done_text">Done!</string>
     <string name="edit_not_completed_todo">edit todo</string>
+    <string name="unmark_text">Un-mark todo :/</string>
+    <string name="delete_text">Delete forever</string>
 </resources>

@@ -21,13 +21,17 @@ class TodoMessage implements Comparable<TodoMessage>{
 
     void updateEditTimestamp(){ editTimestamp = Timestamp.now(); }
 
-    void markAsDone(){
-        isDone = true;
+    void flipDone(){
+        isDone = !isDone;
         updateEditTimestamp();
     }
 
     @Override
     public int compareTo(TodoMessage other) {
         return creationTimestamp.compareTo(other.creationTimestamp);
+    }
+    void setContent(String newContent){
+        content = newContent;
+        updateEditTimestamp();
     }
 }

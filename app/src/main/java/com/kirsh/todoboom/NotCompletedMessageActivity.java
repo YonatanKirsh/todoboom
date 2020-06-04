@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -57,15 +59,13 @@ public class NotCompletedMessageActivity extends AppCompatActivity {
 
                 String newContent = textViewContent.getText().toString();
                 if (!newContent.isEmpty()){
-                    // update edit time
-                    todoMessage = mCommunicator.updateEditTime(todoMessage);
-                    updateEditTimeText();
                     //update change
-                    mCommunicator.setTodoContent(todoMessage, newContent);
-                    Snackbar.make(view, UPDATED_TODO_CONTENT_MESSAGE, Snackbar.LENGTH_SHORT).show();
+                    todoMessage = mCommunicator.setTodoContent(todoMessage, newContent);
+                    showSnackbarTop(view, UPDATED_TODO_CONTENT_MESSAGE, Snackbar.LENGTH_SHORT);
+                    updateEditTimeText();
                     Log.d(TAG, "Updated todo content");
                 }else {
-                    Snackbar.make(view, EMPTY_TEXT_MESSAGE, Snackbar.LENGTH_SHORT).show();
+                    showSnackbarTop(view, EMPTY_TEXT_MESSAGE, Snackbar.LENGTH_SHORT);
                 }
             }
         });
@@ -73,8 +73,8 @@ public class NotCompletedMessageActivity extends AppCompatActivity {
         doneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                todoMessage = mCommunicator.markTodoAsDone(todoMessage);
-                Snackbar.make(view, TODO_DONE_MESSAGE, Snackbar.LENGTH_SHORT).show();
+                todoMessage = mCommunicator.flipDone(todoMessage);
+                showSnackbarTop(view, TODO_DONE_MESSAGE, Snackbar.LENGTH_SHORT);
                 Log.d(TAG, "Marked todo done.");
                 openMain();
             }
@@ -90,5 +90,14 @@ public class NotCompletedMessageActivity extends AppCompatActivity {
     private void updateEditTimeText() {
         String text = "Edit time\n" + sfd.format(todoMessage.editTimestamp.toDate());
         editDate.setText(text);
+    }
+
+    private void showSnackbarTop(View v, String message, int length){
+        Snackbar snack = Snackbar.make(v, message, length);
+        View snackView = snack.getView();
+        FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) snackView.getLayoutParams();
+        params.gravity = Gravity.TOP;
+        snackView.setLayoutParams(params);
+        snack.show();
     }
 }

@@ -40,7 +40,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoMessageHol
     @NonNull
     @Override
     public TodoMessageHolder onCreateViewHolder(@NonNull final ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.todo_sentence ,parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.todo_view,parent, false);
         final TodoMessageHolder todoHolder = new TodoMessageHolder(view);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +48,7 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoMessageHol
                 TodoMessage currentTodoMessage = todoList.get(todoHolder.getAbsoluteAdapterPosition());
                 String id = currentTodoMessage.id;
                 if (!currentTodoMessage.isDone){
-                    openInComplete(id);
+                    openNotComplete(id);
                 }else {
                     openComplete(id);
                 }
@@ -91,14 +91,13 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.TodoMessageHol
         notifyDataSetChanged();
     }
 
-    public void openInComplete(String id) {
+    private void openNotComplete(String id) {
         Intent intent = new Intent(mCaller, NotCompletedMessageActivity.class);
         intent.putExtra(TODO_ID, id);
         mCaller.startActivity(intent);
     }
 
-
-    public void openComplete(String id){
+    private void openComplete(String id){
         Intent intent = new Intent(mCaller, CompletedMessageActivity.class);
         intent.putExtra(TODO_ID, id);
         mCaller.startActivity(intent);
